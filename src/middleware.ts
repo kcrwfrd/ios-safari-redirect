@@ -37,8 +37,7 @@ export function middleware(request: NextRequest) {
       parseFloat(osVersion) >= 17
     ) {
       // Create new URL with x-safari-https protocol
-      const safariUrl = new URL(url.toString())
-      safariUrl.protocol = 'x-safari-https:'
+      const safariUrl = `x-safari-https://${url.host}${url.pathname}${url.search}${url.hash}`
       return NextResponse.redirect(safariUrl)
     }
 
