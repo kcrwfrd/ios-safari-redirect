@@ -32,7 +32,7 @@ export function middleware(request: NextRequest) {
     url.searchParams.set('osVersion', osVersion)
 
     if (
-      browserName === 'safari' &&
+      browserName === 'instagram' &&
       osName === 'ios' &&
       parseFloat(osVersion) >= 17
     ) {
