@@ -1,6 +1,30 @@
 import Image from "next/image";
 
-export default function Home() {
+// app/page.tsx
+function SearchParamsDisplay({
+  searchParams
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  return (
+    <div className="p-4">
+      <h1 className="text-xl font-bold mb-4">Search Parameters</h1>
+      <pre className="bg-gray-900 p-4 rounded-lg overflow-auto">
+        {Object.entries(searchParams).map(([key, value]) => (
+          <div key={key}>
+            <strong>{key}:</strong> {JSON.stringify(value)}
+          </div>
+        ))}
+      </pre>
+    </div>
+  )
+}
+
+export default async function Home(
+  { searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }>}
+) {
+  const params = await searchParams;
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -47,6 +71,9 @@ export default function Home() {
           >
             Read our docs
           </a>
+        </div>
+        <div>
+          <SearchParamsDisplay searchParams={params} />
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
